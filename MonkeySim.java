@@ -1,11 +1,12 @@
 import java.util.*;
 
+
 public class MonkeySim {
 
     private static List<Monkey> _monkeyList = new LinkedList<Monkey>();
 
     public static final int HEADER = 50000;
-    
+
     /**
      * Print out use message and exit with
      * error code 1.
@@ -26,11 +27,11 @@ public class MonkeySim {
      * @param args - array of args from command line
      * @return int - starting monkey
      */
-    
+
     public static int getStartingMonkeyNum(String[] args) {
-	
+
 	int s = 0;
-	
+
 	if (args.length != 1) {
 	    errorAndExit();
 	}
@@ -46,28 +47,33 @@ public class MonkeySim {
 	}
 
 	return s;
-	
+
     }
 
     /**
      * Get a reference to the first monkey in the list.
      * @return Monkey first monkey in list
      */
-    
+
     public static Monkey getFirstMonkey(List<Monkey> ml) {
 
-	int x = ml.size() - 1;
-	int f = x * 33;
-	int r = 17;
-	for (int j = x; j >= 0; j--) {
-	    if (ml.get(j).getMonkeyNum() == 1 && f > 0) {
-		f--;
-		j = x;
-	    } else if (ml.get(j).getMonkeyNum() == 1 && f == 0) {
-		return ml.get(j);
-	    } 
-	}
-	
+	// int x = ml.size() - 1;
+	// int f = x * 33;
+	// int r = 17;
+	// for (int j = x; j >= 0; j--) {
+	//     if (ml.get(j).getMonkeyNum() == 1 && f > 0) {
+	// 	f--;
+	// 	j = x;
+	//     } else if (ml.get(j).getMonkeyNum() == 1 && f == 0) {
+	// 	return ml.get(j);
+	//     }
+	// }
+
+    for(int i=0; i<ml.size(); i++) {
+        if(ml.get(i).getMonkeyNum() == 1) {
+            return ml.get(i);
+        }
+    }
 	return null;
     }
 
@@ -78,13 +84,13 @@ public class MonkeySim {
      * @param m2 Monkey thrown to
      * @return String string version of round
      */
-    
+
     public static String stringifyResults(int c, Monkey m, Monkey m2) {
 	String toReturn = new String("");
 	try {
-	    for (int j=0; j < HEADER; j++) {
-		toReturn += "@";
-	    }
+	    // for (int j=0; j < HEADER; j++) {
+		// toReturn += "@";
+	    // }
 	    toReturn += new String("//Round ");
 	    toReturn += new String("" + c);
 	    toReturn += new String(": Threw banana from Monkey (#");
@@ -95,15 +101,16 @@ public class MonkeySim {
 	    System.out.println("INVALID MONKEY!");
 	    System.exit(2);
 	}
-	return toReturn.substring(HEADER);
+	// return toReturn.substring(HEADER);
+    return toReturn;
     }
-    
+
     /**
      * Return the number of the monkey with a banana
-     * @param 
+     * @param
      * @return int number of monkey w/ banana
      */
-    
+
     public static int monkeyWithBanana(List<Monkey> ml) {
 	for (int j=0; j < ml.size(); j++) {
 	    Monkey m = ml.get(j);
@@ -119,7 +126,7 @@ public class MonkeySim {
 	    }
 	}
 	return -1;
-		
+
     }
 
     public static int addMoreMonkeys(int n, List<Monkey> ml) {
@@ -144,10 +151,10 @@ public class MonkeySim {
      * @param mw watcher of monkey
      * @return int number of rounds taken to get to first monkey
      */
-    
+
     public static int runSimulation(List<Monkey> ml, MonkeyWatcher mw) {
 	int nextMonkey = -1;
-	
+
 	while (!getFirstMonkey(ml).hasBanana()) {
 	    mw.incrementRounds();
 	    Monkey m = ml.get(monkeyWithBanana(ml));
@@ -161,27 +168,27 @@ public class MonkeySim {
 	System.out.println("First monkey has the banana!");
 	return mw.getRounds();
     }
-    
+
     /**
      * Entry point of program - run MonkeySim.
      * Accepts one argument, the starting monkey
      * number.
      * @param args - Array of arguments from cmd line
      */
-    
+
     public static void main(String[] args) {
 
 	int s = getStartingMonkeyNum(args);
 	Monkey tmpMonkey;
 	Banana b = new Banana();
 	MonkeyWatcher mw = new MonkeyWatcher();
-	
+
 	for (int j = 0; j < s + 1; j++) {
 	    tmpMonkey = new Monkey();
 	    _monkeyList.add(tmpMonkey);
 	}
 	_monkeyList.get(s).throwBananaTo(b);
-	
+
 	int numRounds = runSimulation(_monkeyList, mw);
 	System.out.println("Completed in " + numRounds + " rounds.");
     }
