@@ -1,20 +1,14 @@
 import static org.junit.Assert.*;
-import static org.testng.FileAssert.fail;
-
-import com.thoughtworks.selenium.Selenium;
-import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.concurrent.TimeUnit;
 
 public class PinningTests {
 
+    Monkey firstMonkey;
     /**
      * Runs this setup before the actual tests
      *
@@ -22,13 +16,19 @@ public class PinningTests {
      */
     @Before
     public void setUp() {
-
+        firstMonkey = new Monkey();
     }
 
     @Test
-    public void getFirstMonkeyTest() {
-        Monkey firstMonkey = new Monkey();
-        assertEquals(firstMonkey.getId, 1);
+    public void getFirstMonkeyTestPasses() throws Exception{
+        assertEquals(firstMonkey.getId(), 0);
     }
+
+    @Test
+    public void getFirstMonkeyTestFails() throws Exception{
+        assertNotEquals(firstMonkey.getId(), 20);
+    }
+
+    
 
 }
