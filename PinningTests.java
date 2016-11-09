@@ -10,30 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 public class PinningTests {
 
-//    Monkey firstMonkey, secondMonkey, thirdMonkey, currMonkey;
-    Monkey blah;
-    List<Monkey> test;
-//    List<Monkey> ml;
-    /**
-     * Runs this setup before the actual tests
-     *
-     * @throws Exception
-     */
-    @Before
-    public void setUp() {
-//        firstMonkey = new Monkey();
-//        firstMonkey.generateId(0);
-//        secondMonkey = new Monkey();
-//        secondMonkey.generateId(1);
-//        thirdMonkey = new Monkey();
-//        thirdMonkey.generateId(2);
-//        ml = new LinkedList<>();
-//        ml.add(firstMonkey);
-//        ml.add(secondMonkey);
-//        ml.add(thirdMonkey);
-//        currMonkey = MonkeySim.getFirstMonkey(ml);
-    }
-
     @Test
     public void getFirstMonkeyAssertNull() throws Exception {
         List<Monkey> ml = new LinkedList<>();
@@ -41,48 +17,26 @@ public class PinningTests {
     }
 
     @Test
-    public void getFirstMonkeyTestPasses() throws Exception {
-//        Monkey firstMonkey = new Monkey();
-//        firstMonkey.generateId(0);
-//        Monkey secondMonkey = new Monkey();
-//        secondMonkey.generateId(1);
-//        Monkey thirdMonkey = new Monkey();
-//        thirdMonkey.generateId(2);
-//        List<Monkey> ml = new LinkedList<>();
-//        ml.add(firstMonkey);
-//        ml.add(secondMonkey);
-//        ml.add(thirdMonkey);
-//        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
-        assertEquals(blah.getMonkeyNum(), 1);
+    public void getFirstMonkeyTestAssertNotSame() throws Exception {
+        Monkey firstMonkey = new Monkey();
+        Monkey secondMonkey = new Monkey();
+        List<Monkey> ml = new LinkedList<>();
+        ml.add(firstMonkey);
+        ml.add(secondMonkey);
+        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
+        assertNotSame(currMonkey, firstMonkey);
     }
 
-
-
-//    @Test
-//    public void getFirstMonkeyIdNot20() {
-//        Monkey firstMonkey = new Monkey();
-//        firstMonkey.generateId(1);
-//        List<Monkey> ml = new LinkedList<>();
-//        ml.add(firstMonkey);
-//        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
-//        assertNotEquals(currMonkey.getMonkeyNum(), 20);
-//    }
-
-//    @Test
-//    public void getFirstMonkeyTestNotNull() {
-//        Monkey firstMonkey = new Monkey();
-//        firstMonkey.generateId(0);
-//        Monkey secondMonkey = new Monkey();
-//        secondMonkey.generateId(1);
-//        Monkey thirdMonkey = new Monkey();
-//        thirdMonkey.generateId(2);
-//        List<Monkey> ml = new LinkedList<>();
-//        ml.add(firstMonkey);
-//        ml.add(secondMonkey);
-//        ml.add(thirdMonkey);
-//        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
-//        assertEquals(currMonkey, secondMonkey);
-//    }
+    @Test
+    public void getFirstMonkeyTestSame() {
+        Monkey firstMonkey = new Monkey();
+        Monkey secondMonkey = new Monkey();
+        List<Monkey> ml = new LinkedList<>();
+        ml.add(firstMonkey);
+        ml.add(secondMonkey);
+        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
+        assertNotEquals(currMonkey, firstMonkey);
+    }
 
     @Test
     public void stringifyResultsMonkey1To2() throws NoIdException {
