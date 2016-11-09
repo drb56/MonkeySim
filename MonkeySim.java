@@ -176,7 +176,7 @@ public class MonkeySim {
      * @param args - Array of arguments from cmd line
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoIdException {
 
 	int s = getStartingMonkeyNum(args);
 	Monkey tmpMonkey;
