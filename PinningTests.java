@@ -10,8 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 public class PinningTests {
 
-    Monkey firstMonkey, secondMonkey, thirdMonkey;
-    List<Monkey> ml;
+//    Monkey firstMonkey, secondMonkey, thirdMonkey, currMonkey;
+    Monkey blah;
+    List<Monkey> test;
+//    List<Monkey> ml;
     /**
      * Runs this setup before the actual tests
      *
@@ -19,81 +21,132 @@ public class PinningTests {
      */
     @Before
     public void setUp() {
-        firstMonkey = new Monkey();
-        firstMonkey.generateId(0);
-        secondMonkey = new Monkey();
-        secondMonkey.generateId(1);
-        thirdMonkey = new Monkey();
-        thirdMonkey.generateId(2);
-        ml = new LinkedList<>();
-        ml.add(firstMonkey);
-        ml.add(secondMonkey);
-        ml.add(thirdMonkey);
+//        firstMonkey = new Monkey();
+//        firstMonkey.generateId(0);
+//        secondMonkey = new Monkey();
+//        secondMonkey.generateId(1);
+//        thirdMonkey = new Monkey();
+//        thirdMonkey.generateId(2);
+//        ml = new LinkedList<>();
+//        ml.add(firstMonkey);
+//        ml.add(secondMonkey);
+//        ml.add(thirdMonkey);
+//        currMonkey = MonkeySim.getFirstMonkey(ml);
+    }
+
+    @Test
+    public void getFirstMonkeyAssertNull() throws Exception {
+        List<Monkey> ml = new LinkedList<>();
+        assertNull(MonkeySim.getFirstMonkey(ml));
     }
 
     @Test
     public void getFirstMonkeyTestPasses() throws Exception {
-
-        assertEquals(firstMonkey.getId(), firstMonkey.getMonkeyNum());
+//        Monkey firstMonkey = new Monkey();
+//        firstMonkey.generateId(0);
+//        Monkey secondMonkey = new Monkey();
+//        secondMonkey.generateId(1);
+//        Monkey thirdMonkey = new Monkey();
+//        thirdMonkey.generateId(2);
+//        List<Monkey> ml = new LinkedList<>();
+//        ml.add(firstMonkey);
+//        ml.add(secondMonkey);
+//        ml.add(thirdMonkey);
+//        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
+        assertEquals(blah.getMonkeyNum(), 1);
     }
 
-    @Test
-    public void getFirstMonkeyTestFails() throws Exception {
-        assertNotEquals(firstMonkey.getId(), 20);
-    }
 
-    @Test
-    public void getFirstMonkeyTestNotNull() {
-        assertNotNull(MonkeySim.getFirstMonkey(ml));
-    }
 
 //    @Test
-//    public void stringifyResultsMonkey0To1() {
-//        String output = "//Round 1: Threw banana from Monkey (#0 / ID 0) to Monkey (#1 / ID 1)";
-//        assertEquals(MonkeySim.stringifyResults(1, firstMonkey, secondMonkey), output);
+//    public void getFirstMonkeyIdNot20() {
+//        Monkey firstMonkey = new Monkey();
+//        firstMonkey.generateId(1);
+//        List<Monkey> ml = new LinkedList<>();
+//        ml.add(firstMonkey);
+//        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
+//        assertNotEquals(currMonkey.getMonkeyNum(), 20);
 //    }
-//
+
 //    @Test
-//    public void stringifyResultsMonkey0To2() {
-//        String output = "//Round 10: Threw banana from Monkey (#0 / ID 0) to Monkey (#2 / ID 2)";
-//        assertEquals(MonkeySim.stringifyResults(10, firstMonkey, thirdMonkey), output);
-//    }
-//
-//    @Test
-//    public void stringifyResultsMonkey1To2() {
-//        String output = "//Round 100: Threw banana from Monkey (#7 / ID 7) to Monkey (#8 / ID 8)";
-//        assertEquals(MonkeySim.stringifyResults(100, secondMonkey, thirdMonkey), output);
+//    public void getFirstMonkeyTestNotNull() {
+//        Monkey firstMonkey = new Monkey();
+//        firstMonkey.generateId(0);
+//        Monkey secondMonkey = new Monkey();
+//        secondMonkey.generateId(1);
+//        Monkey thirdMonkey = new Monkey();
+//        thirdMonkey.generateId(2);
+//        List<Monkey> ml = new LinkedList<>();
+//        ml.add(firstMonkey);
+//        ml.add(secondMonkey);
+//        ml.add(thirdMonkey);
+//        Monkey currMonkey = MonkeySim.getFirstMonkey(ml);
+//        assertEquals(currMonkey, secondMonkey);
 //    }
 
     @Test
     public void stringifyResultsMonkey1To2() throws NoIdException {
+        Monkey firstMonkey = new Monkey();
+        firstMonkey.generateId(0);
+        Monkey secondMonkey = new Monkey();
+        secondMonkey.generateId(1);
         int firstId = firstMonkey.getId();
         int secondId = secondMonkey.getId();
-        String output = "//Round 1: Threw banana from Monkey (#" + firstId + " / ID "
-                + firstId + ") to Monkey (#" + secondId + " / ID " + secondId + ")";
+        String output = "//Round 1: Threw banana from Monkey (#" + firstMonkey.getMonkeyNum() + " / ID "
+                + firstId + ") to Monkey (#" + secondMonkey.getMonkeyNum() + " / ID " + secondId + ")";
         assertEquals(MonkeySim.stringifyResults(1, firstMonkey, secondMonkey), output);
     }
 
     @Test
     public void stringifyResultsMonkey1To3() throws NoIdException {
+        Monkey firstMonkey = new Monkey();
+        firstMonkey.generateId(0);
+        Monkey thirdMonkey = new Monkey();
+        thirdMonkey.generateId(2);
         int firstId = firstMonkey.getId();
         int secondId = thirdMonkey.getId();
-        String output = "//Round 1: Threw banana from Monkey (#" + firstId + " / ID "
-                + firstId + ") to Monkey (#" + secondId + " / ID " + secondId + ")";
+        String output = "//Round 1: Threw banana from Monkey (#" + firstMonkey.getMonkeyNum() + " / ID "
+                + firstId + ") to Monkey (#" + thirdMonkey.getMonkeyNum() + " / ID " + secondId + ")";
         assertEquals(MonkeySim.stringifyResults(1, firstMonkey, thirdMonkey), output);
     }
 
     @Test
     public void stringifyResultsMonkey2To3() throws NoIdException {
+        Monkey secondMonkey = new Monkey();
+        secondMonkey.generateId(1);
+        Monkey thirdMonkey = new Monkey();
+        thirdMonkey.generateId(2);
         int firstId = secondMonkey.getId();
         int secondId = thirdMonkey.getId();
-        String output = "//Round 1: Threw banana from Monkey (#" + firstId + " / ID "
-                + firstId + ") to Monkey (#" + secondId + " / ID " + secondId + ")";
+        String output = "//Round 1: Threw banana from Monkey (#" + secondMonkey.getMonkeyNum() + " / ID "
+                + firstId + ") to Monkey (#" + thirdMonkey.getMonkeyNum() + " / ID " + secondId + ")";
         assertEquals(MonkeySim.stringifyResults(1, secondMonkey, thirdMonkey), output);
     }
 
     @Test
+    public void stringifyResultsNotNull() {
+        Monkey firstMonkey = new Monkey();
+        firstMonkey.generateId(0);
+        Monkey secondMonkey = new Monkey();
+        secondMonkey.generateId(1);
+        assertNotNull(MonkeySim.stringifyResults(1, firstMonkey, secondMonkey));
+    }
+
+    @Test
     public void generateId() {
-        assertEquals(firstMonkey.generateId(0), 0);
+        Monkey firstMonkey = new Monkey();
+        assertEquals(firstMonkey.generateId(0), 223492);
+    }
+
+    @Test
+    public void generateIdNotEquals() {
+        Monkey secondMonkey = new Monkey();
+        assertNotEquals(secondMonkey.generateId(1), 1);
+    }
+
+    @Test
+    public void generateIdNotNull() {
+        Monkey thirdMonkey = new Monkey();
+        assertNotNull(thirdMonkey.generateId(2));
     }
 }
