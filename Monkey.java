@@ -1,3 +1,7 @@
+/*  Ritika Maknoor, David Bickford
+    CS 1632
+    Deliverable 4 */
+
 import java.util.*;
 
 public class Monkey {
@@ -85,7 +89,7 @@ public class Monkey {
      */
 
     public int generateId(int n) {
-//	 int toReturn = 100;
+//   int toReturn = 100;
 //	 int bird = -900;
 //	 for (int l=0; l <1000; l++) {
 //	     for (int m = 0; m < 100; m++) {
@@ -97,7 +101,6 @@ public class Monkey {
 //	 toReturn += 10;
 //	 toReturn += n;
 //	 return toReturn;
-
     return n+223492;
     }
 
